@@ -1,5 +1,7 @@
 <div>
   <h1>Starships</h1>
+
+  <!-- Manufacturer Filter -->
   <label for="manufacturer">Filter by Manufacturer:</label>
   <select id="manufacturer" (change)="filterByManufacturer($event)">
     <option value="">All</option>
@@ -8,7 +10,16 @@
     </option>
   </select>
 
-  <ul>
+  <!-- Angular Material Spinner -->
+  <mat-progress-spinner
+    *ngIf="loading"
+    mode="indeterminate"
+    diameter="50"
+    color="primary"
+  ></mat-progress-spinner>
+
+  <!-- Starships List -->
+  <ul *ngIf="!loading">
     <li *ngFor="let ship of filteredStarships$ | async">
       <h3>{{ ship.name }}</h3>
       <p><strong>Manufacturer:</strong> {{ ship.manufacturer }}</p>
@@ -16,6 +27,7 @@
     </li>
   </ul>
 
+  <!-- Pagination Buttons -->
   <div>
     <button [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
       Previous

@@ -3,11 +3,12 @@ import { StarshipService } from '../../services/starship.service';
 import { Starship } from '../../models/starship';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-starships',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatProgressSpinnerModule],
   templateUrl: './starships.component.html',
   styleUrls: ['./starships.component.scss'],
 })
@@ -22,6 +23,7 @@ export class StarshipsComponent implements OnInit {
   manufacturers: string[] = [];
   currentPage: number = 1;
   totalPages: number = 0;
+  loading: boolean = false;
 
   constructor(private starshipService: StarshipService) {}
 
@@ -30,17 +32,25 @@ export class StarshipsComponent implements OnInit {
   }
 
   loadStarships(page: number): void {
+    this.loading = true; // Start loading animation
     this.starshipService
       .getStarships(page)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((response) => {
-        this.starshipsSubject.next(response.results);
-        this.filteredStarshipsSubject.next(response.results);
-        this.manufacturers = Array.from(
-          new Set(response.results.map((ship) => ship.manufacturer))
-        );
-        this.totalPages = Math.ceil(response.count / 10);
-      });
+      .subscribe(
+        (response) => {
+          this.starshipsSubject.next(response.results);
+          this.filteredStarshipsSubject.next(response.results);
+          this.manufacturers = Array.from(
+            new Set(response.results.map((ship) => ship.manufacturer))
+          );
+          this.totalPages = Math.ceil(response.count / 10);
+          this.loading = false; // Stop loading animation
+        },
+        (error) => {
+          console.error('Error fetching starships:', error);
+          this.loading = false; // Stop loading animation on error
+        }
+      );
   }
 
   filterByManufacturer(event: Event): void {
