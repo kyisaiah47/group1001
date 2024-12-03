@@ -1,39 +1,57 @@
-<div>
-  <h1>Starships</h1>
+<div class="container">
+  <h1 class="title">Starships</h1>
 
   <!-- Manufacturer Filter -->
-  <label for="manufacturer">Filter by Manufacturer:</label>
-  <select id="manufacturer" (change)="filterByManufacturer($event)">
-    <option value="">All</option>
-    <option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">
-      {{ manufacturer }}
-    </option>
-  </select>
+  <div class="filter-section">
+    <label for="manufacturer" class="filter-label"
+      >Filter by Manufacturer:</label
+    >
+    <select
+      id="manufacturer"
+      class="filter-select"
+      (change)="filterByManufacturer($event)"
+    >
+      <option value="">All</option>
+      <option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">
+        {{ manufacturer }}
+      </option>
+    </select>
+  </div>
 
   <!-- Angular Material Spinner -->
-  <mat-progress-spinner
-    *ngIf="loading"
-    mode="indeterminate"
-    diameter="50"
-    color="primary"
-  ></mat-progress-spinner>
+  <div class="spinner-wrapper" *ngIf="loading">
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="50"
+      color="primary"
+    ></mat-progress-spinner>
+  </div>
 
   <!-- Starships List -->
-  <ul *ngIf="!loading">
-    <li *ngFor="let ship of filteredStarships$ | async">
-      <h3>{{ ship.name }}</h3>
-      <p><strong>Manufacturer:</strong> {{ ship.manufacturer }}</p>
-      <p><strong>Model:</strong> {{ ship.model }}</p>
+  <ul class="starship-list" *ngIf="!loading">
+    <li *ngFor="let ship of filteredStarships$ | async" class="starship-item">
+      <h3 class="starship-name">{{ ship.name }}</h3>
+      <p class="starship-detail">
+        <strong>Manufacturer:</strong> {{ ship.manufacturer }}
+      </p>
+      <p class="starship-detail"><strong>Model:</strong> {{ ship.model }}</p>
     </li>
   </ul>
 
   <!-- Pagination Buttons -->
-  <div>
-    <button [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
+  <div class="pagination">
+    <button
+      class="pagination-button"
+      [disabled]="currentPage === 1"
+      (click)="goToPage(currentPage - 1)"
+    >
       Previous
     </button>
-    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <span class="pagination-info"
+      >Page {{ currentPage }} of {{ totalPages }}</span
+    >
     <button
+      class="pagination-button"
       [disabled]="currentPage === totalPages"
       (click)="goToPage(currentPage + 1)"
     >

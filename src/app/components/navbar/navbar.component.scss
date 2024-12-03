@@ -1,0 +1,38 @@
+.navbar {
+  background-color: #5a4a42; // Matches the brownish tone from the screenshot
+  color: #ffffff;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  height: 64px; // Adjust height to match the design
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .navbar-link {
+    font-family: "Poppins", "Helvetica", "Arial", "Lucida Grande", sans-serif; // Use Poppins font
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: none; // Disable uppercase text
+    margin: 0 12px;
+    text-decoration: none;
+    transition: color 0.3s, background-color 0.3s;
+
+    &:hover {
+      color: #ffd700; // Golden color for hover effect
+      background-color: transparent; // No background on hover
+    }
+
+    &:active {
+      color: #ffcc00; // Slightly darker gold for active state
+    }
+  }
+}
