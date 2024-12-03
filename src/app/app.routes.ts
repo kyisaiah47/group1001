@@ -1,3 +1,15 @@
 import { Routes } from '@angular/router';
+import { provideRouter } from '@angular/router';
 
-export const routes: Routes = [];
+// Import components
+import { StarshipsComponent } from './pages/starships/starships.component';
+import { FilterComponent } from './pages/filter/filter.component';
+
+// Define routes
+export const appRoutes: Routes = [
+  { path: '', redirectTo: 'starships', pathMatch: 'full' },
+  { path: 'starships', component: StarshipsComponent },
+  { path: 'filter', component: FilterComponent },
+];
+
+export const appRouterProvider = provideRouter(appRoutes);
