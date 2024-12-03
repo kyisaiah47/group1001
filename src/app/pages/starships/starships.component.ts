@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { StarshipService } from '../../services/starship.service';
-import { CommonModule } from '@angular/common';
-import { Subject, takeUntil } from 'rxjs';
 import { Starship } from '../../models/starship';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-starships',
@@ -13,8 +13,12 @@ import { Starship } from '../../models/starship';
 })
 export class StarshipsComponent implements OnInit {
   private unsubscribe$ = new Subject<void>();
-  starships: Starship[] = [];
-  filteredStarships: Starship[] = [];
+  private starshipsSubject = new BehaviorSubject<Starship[]>([]);
+  private filteredStarshipsSubject = new BehaviorSubject<Starship[]>([]);
+
+  starships$ = this.starshipsSubject.asObservable();
+  filteredStarships$ = this.filteredStarshipsSubject.asObservable();
+
   manufacturers: string[] = [];
   currentPage: number = 1;
   totalPages: number = 0;
@@ -30,10 +34,10 @@ export class StarshipsComponent implements OnInit {
       .getStarships(page)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((response) => {
-        this.starships = response.results;
-        this.filteredStarships = [...this.starships];
+        this.starshipsSubject.next(response.results);
+        this.filteredStarshipsSubject.next(response.results);
         this.manufacturers = Array.from(
-          new Set(this.starships.map((ship) => ship.manufacturer))
+          new Set(response.results.map((ship) => ship.manufacturer))
         );
         this.totalPages = Math.ceil(response.count / 10);
       });
@@ -41,28 +45,16 @@ export class StarshipsComponent implements OnInit {
 
   filterByManufacturer(event: Event): void {
     const target = event.target as HTMLSelectElement | null;
-    const manufacturer = target?.value || ''; // Default to empty string if null
-    if (manufacturer) {
-      this.filteredStarships = this.starships.filter((ship) =>
-        ship.manufacturer.includes(manufacturer)
-      );
-    } else {
-      this.filteredStarships = [...this.starships];
-    }
-  }
-
-  nextPage(): void {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.loadStarships(this.currentPage);
-    }
-  }
-
-  previousPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.loadStarships(this.currentPage);
-    }
+    const manufacturer = target?.value || '';
+    this.starships$.pipe(takeUntil(this.unsubscribe$)).subscribe((ships) => {
+      if (manufacturer) {
+        this.filteredStarshipsSubject.next(
+          ships.filter((ship) => ship.manufacturer.includes(manufacturer))
+        );
+      } else {
+        this.filteredStarshipsSubject.next(ships);
+      }
+    });
   }
 
   goToPage(page: number): void {

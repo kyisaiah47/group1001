@@ -9,7 +9,7 @@
   </select>
 
   <ul>
-    <li *ngFor="let ship of filteredStarships">
+    <li *ngFor="let ship of filteredStarships$ | async">
       <h3>{{ ship.name }}</h3>
       <p><strong>Manufacturer:</strong> {{ ship.manufacturer }}</p>
       <p><strong>Model:</strong> {{ ship.model }}</p>
