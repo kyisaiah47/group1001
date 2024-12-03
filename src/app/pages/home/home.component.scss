@@ -1,0 +1,58 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: calc(100vh - 64px);
+  padding: 16px;
+  background: var(--mat-sys-surface);
+
+  .rocket-icon {
+    font-size: 70px;
+    height: 70px;
+    width: 70px;
+    color: var(--mat-sys-primary);
+    animation: rocket-launch 2s infinite;
+  }
+
+  .welcome-title {
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--mat-sys-primary);
+    margin-bottom: 16px;
+  }
+
+  .welcome-text {
+    font-size: 18px;
+    color: var(--mat-sys-on-surface-variant);
+    margin-bottom: 32px;
+    max-width: 600px;
+  }
+
+  .explore-button {
+    font-size: 18px;
+    padding: 12px 24px;
+    text-transform: uppercase;
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+    cursor: pointer;
+    border-radius: 5px;
+    &:hover {
+      opacity: 0.8;
+      transition: 0.5s ease;
+    }
+  }
+}
+
+@keyframes rocket-launch {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

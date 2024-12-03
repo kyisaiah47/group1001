@@ -29,7 +29,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss", "src/theme-colors.scss"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {
