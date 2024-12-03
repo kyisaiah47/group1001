@@ -6,10 +6,10 @@ import { StarshipsComponent } from './pages/starships/starships.component';
 import { FilterComponent } from './pages/filter/filter.component';
 
 // Define routes
-export const appRoutes: Routes = [
+export const routes: Routes = [
   { path: '', redirectTo: 'starships', pathMatch: 'full' },
   { path: 'starships', component: StarshipsComponent },
   { path: 'filter', component: FilterComponent },
 ];
 
-export const appRouterProvider = provideRouter(appRoutes);
+export const appRouterProvider = provideRouter(routes);
