@@ -15,4 +15,17 @@
       <p><strong>Model:</strong> {{ ship.model }}</p>
     </li>
   </ul>
+
+  <div>
+    <button [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
+      Previous
+    </button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button
+      [disabled]="currentPage === totalPages"
+      (click)="goToPage(currentPage + 1)"
+    >
+      Next
+    </button>
+  </div>
 </div>
