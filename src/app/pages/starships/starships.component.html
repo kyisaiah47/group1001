@@ -42,21 +42,27 @@
       </button>
 
       <div *ngIf="isExpanded(ship)" class="additional-details">
-        <p class="starship-detail"><strong>Crew:</strong> {{ ship.crew }}</p>
         <p class="starship-detail">
-          <strong>Passengers:</strong> {{ ship.passengers }}
+          <strong>Cargo Capacity:</strong> {{ ship.cargo_capacity }}
         </p>
         <p class="starship-detail">
-          <strong>Cargo Capacity:</strong> {{ ship.cargoCapacity }}
+          <strong>Cost in Credits:</strong> {{ ship.cost_in_credits }}
+        </p>
+        <p class="starship-detail">
+          <strong>Consumables:</strong> {{ ship.consumables }}
+        </p>
+        <p class="starship-detail"><strong>Crew:</strong> {{ ship.crew }}</p>
+        <p class="starship-detail">
+          <strong>Hyperdrive Rating:</strong> {{ ship.hyperdrive_rating }}
         </p>
         <p class="starship-detail">
           <strong>Length:</strong> {{ ship.length }}
         </p>
         <p class="starship-detail">
-          <strong>Consumables:</strong> {{ ship.consumables }}
+          <strong>Passengers:</strong> {{ ship.passengers }}
         </p>
         <p class="starship-detail">
-          <strong>Manufacturer:</strong> {{ ship.manufacturer }}
+          <strong>Starship Class:</strong> {{ ship.starship_class }}
         </p>
       </div>
     </li>

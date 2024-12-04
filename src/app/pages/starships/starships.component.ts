@@ -57,6 +57,7 @@ export class StarshipsComponent implements OnInit {
           );
           this.manufacturers = Array.from(new Set(allManufacturers));
 
+          console.log(response.results);
           this.totalCount = response.count;
           this.totalPages = Math.ceil(this.totalCount / 10);
           this.loading = false;
