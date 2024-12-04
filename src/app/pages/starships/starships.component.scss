@@ -74,9 +74,18 @@
     border: 1px solid var(--mat-sys-outline);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 
+    &.expanded {
+      height: auto;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    &:not(.expanded) {
+      height: fit-content;
+    }
+
     &:hover {
-      transform: translateY(-4px); // Lift effect on hover
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); // Stronger shadow
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     }
 
     .starship-name {

@@ -26,7 +26,11 @@
   </div>
 
   <ul class="starship-list" *ngIf="!loading">
-    <li *ngFor="let ship of filteredStarships$ | async" class="starship-item">
+    <li
+      *ngFor="let ship of filteredStarships$ | async"
+      class="starship-item"
+      [class.expanded]="isExpanded(ship)"
+    >
       <h3 class="starship-name">{{ ship.name }}</h3>
       <p class="starship-detail">
         <strong>Manufacturer:</strong> {{ ship.manufacturer }}
