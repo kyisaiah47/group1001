@@ -48,6 +48,6 @@ Starship Explorer is a single-page application (SPA) built with Angular that all
 
 1. Clone the repository:
    ```bash
-   git clone <repository_url>
-   cd <repository_directory>
+   git clone group1001
+   cd group1001
    ```

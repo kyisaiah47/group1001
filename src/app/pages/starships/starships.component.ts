@@ -4,11 +4,12 @@ import { Starship } from '../../models/starship';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-starships',
   standalone: true,
-  imports: [CommonModule, MatProgressSpinnerModule],
+  imports: [CommonModule, MatProgressSpinnerModule, MatIconModule],
   templateUrl: './starships.component.html',
   styleUrls: ['./starships.component.scss'],
 })
@@ -46,8 +47,8 @@ export class StarshipsComponent implements OnInit {
     this.starshipService
       .getStarships(this.currentPage)
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(
-        (response) => {
+      .subscribe({
+        next: (response) => {
           this.starshipsSubject.next(response.results);
           this.filteredStarshipsSubject.next(response.results);
 
@@ -60,11 +61,11 @@ export class StarshipsComponent implements OnInit {
           this.totalPages = Math.ceil(this.totalCount / 10);
           this.loading = false;
         },
-        (error) => {
+        error: (error) => {
           console.error('Error fetching starships:', error);
           this.loading = false;
-        }
-      );
+        },
+      });
   }
 
   filterByManufacturer(event: Event): void {

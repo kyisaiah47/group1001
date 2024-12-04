@@ -4,11 +4,17 @@
   padding: 40px 24px;
   font-family: "Poppins", "Helvetica", "Arial", "Lucida Grande", sans-serif;
   color: var(--mat-sys-on-surface);
+  background: linear-gradient(
+    to bottom,
+    var(--mat-sys-surface-light),
+    var(--mat-sys-surface)
+  );
+  border-radius: 8px;
 }
 
 .title {
-  font-size: 48px;
-  font-weight: bold;
+  font-size: 42px;
+  font-weight: 700;
   color: var(--mat-sys-primary);
   text-align: center;
   margin-bottom: 32px;
@@ -19,6 +25,10 @@
   align-items: center;
   gap: 16px;
   margin-bottom: 24px;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--mat-sys-surface-light);
 
   .filter-label {
     font-size: 16px;
@@ -62,6 +72,22 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 16px;
     border: 1px solid var(--mat-sys-outline);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px); // Lift effect on hover
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); // Stronger shadow
+    }
+
+    .starship-name {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .starship-detail {
+      font-size: 16px;
+      line-height: 1.5;
+    }
 
     .toggle-details-button {
       margin-top: 10px;
@@ -131,5 +157,18 @@
     font-size: 16px;
     font-weight: bold;
     color: var(--mat-sys-primary);
+  }
+}
+
+.additional-details {
+  animation: fadeIn 0.3s ease-in;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 }
