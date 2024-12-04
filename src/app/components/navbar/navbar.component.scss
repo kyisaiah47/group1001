@@ -1,10 +1,10 @@
 .navbar {
-  background-color: #5a4a42; // Matches the brownish tone from the screenshot
-  color: #ffffff;
+  background-color: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
   padding: 0 24px;
   display: flex;
   align-items: center;
-  height: 64px; // Adjust height to match the design
+  height: 64px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   .navbar-container {
@@ -20,19 +20,18 @@
     font-family: "Poppins", "Helvetica", "Arial", "Lucida Grande", sans-serif; // Use Poppins font
     font-size: 16px;
     font-weight: 600;
-    color: #ffffff;
-    text-transform: none; // Disable uppercase text
+    color: var(--mat-sys-on-primary);
+    text-transform: none;
     margin: 0 12px;
     text-decoration: none;
-    transition: color 0.3s, background-color 0.3s;
+    transition: 0.3s;
 
     &:hover {
-      color: #ffd700; // Golden color for hover effect
-      background-color: transparent; // No background on hover
+      opacity: 0.8;
     }
 
     &:active {
-      color: #ffcc00; // Slightly darker gold for active state
+      color: var(--mat-sys-secondary-light);
     }
   }
 }

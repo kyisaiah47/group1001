@@ -25,8 +25,17 @@ export class StarshipsComponent implements OnInit {
   totalPages: number = 0;
   totalCount: number = 0;
   loading: boolean = false;
+  expandedShip: Starship | null = null;
+  filtered: boolean = false;
 
   constructor(private starshipService: StarshipService) {}
+
+  private splitManufacturers(manufacturer: string): string[] {
+    const regex = /([^,]+(?:, Inc\.)?)/g;
+    const matches = manufacturer.match(regex);
+
+    return matches ? matches.map((m) => m.trim()) : [];
+  }
 
   ngOnInit(): void {
     this.loadStarships();
@@ -42,7 +51,6 @@ export class StarshipsComponent implements OnInit {
           this.starshipsSubject.next(response.results);
           this.filteredStarshipsSubject.next(response.results);
 
-          // Normalize manufacturers list
           const allManufacturers = response.results.flatMap((ship) =>
             this.splitManufacturers(ship.manufacturer)
           );
@@ -69,24 +77,27 @@ export class StarshipsComponent implements OnInit {
         )
       : ships;
 
-    this.currentPage = 1; // Reset to the first page
-    this.filteredStarshipsSubject.next(filteredShips);
-
-    // Recalculate total pages based on the filtered result
     if (manufacturer) {
+      this.filtered = true;
       this.totalPages = Math.ceil(filteredShips.length / 10);
     } else {
+      this.filtered = false;
       this.totalPages = Math.ceil(this.totalCount / 10);
+    }
+
+    this.filteredStarshipsSubject.next(filteredShips);
+  }
+
+  toggleDetails(ship: Starship): void {
+    if (this.expandedShip === ship) {
+      this.expandedShip = null;
+    } else {
+      this.expandedShip = ship;
     }
   }
 
-  private splitManufacturers(manufacturer: string): string[] {
-    // Match manufacturers, including special cases like "Gallofree Yards, Inc."
-    const regex = /([^,]+(?:, Inc\.)?)/g;
-    const matches = manufacturer.match(regex);
-
-    // Return trimmed results
-    return matches ? matches.map((m) => m.trim()) : [];
+  isExpanded(ship: Starship): boolean {
+    return this.expandedShip === ship;
   }
 
   goToPage(page: number): void {

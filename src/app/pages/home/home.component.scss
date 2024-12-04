@@ -38,9 +38,12 @@
     color: var(--mat-sys-on-primary);
     cursor: pointer;
     border-radius: 5px;
+    text-transform: none;
+    text-decoration: none;
+    transition: 0.3s;
+
     &:hover {
       opacity: 0.8;
-      transition: 0.5s ease;
     }
   }
 }

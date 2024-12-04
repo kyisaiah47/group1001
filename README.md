@@ -1,59 +1,53 @@
-# Group1001
+# Starship Explorer
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
+---
 
-## Development server
+## Overview
 
-To start a local development server, run:
+Starship Explorer is a single-page application (SPA) built with Angular that allows users to explore a collection of starships from the Star Wars universe. This application provides seamless navigation, filtering capabilities, and a user-friendly interface to interact with the StarWars API.
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Features
 
-## Code scaffolding
+1. **Navigation**:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+   - The app includes navigation between the homepage and the starships page.
+   - The homepage welcomes users and introduces the app's purpose.
 
-```bash
-ng generate component component-name
-```
+2. **Starship List**:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+   - Displays the entire collection of starships from the StarWars API.
+   - Provides detailed information about each starship, including the ability to expand for additional details.
 
-```bash
-ng generate --help
-```
+3. **Filtering**:
 
-## Building
+   - Allows users to filter starships by their manufacturer.
+   - Filters update the displayed list dynamically and adjust the pagination accordingly.
 
-To build the project run:
+4. **Pagination**:
 
-```bash
-ng build
-```
+   - Supports paginated viewing of starship results.
+   - Pagination reflects filtered results dynamically and ensures smooth navigation.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+5. **Angular Material**:
+   - Leverages Angular Material for consistent and modern UI components, including buttons, dropdowns, and spinners.
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Technologies Used
 
-```bash
-ng test
-```
+- **Angular**: For building the SPA structure and handling dynamic interactions.
+- **Angular Material**: For UI styling and prebuilt components.
+- **RxJS**: To manage asynchronous data streams and state.
+- **StarWars API**: To fetch starship data and implement filtering functionality.
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## How to Run the Project
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. Clone the repository:
+   ```bash
+   git clone <repository_url>
+   cd <repository_directory>
+   ```

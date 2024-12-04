@@ -1,7 +1,6 @@
 <div class="container">
   <h1 class="title">Starships</h1>
 
-  <!-- Manufacturer Filter -->
   <div class="filter-section">
     <label for="manufacturer" class="filter-label"
       >Filter by Manufacturer:</label
@@ -18,7 +17,6 @@
     </select>
   </div>
 
-  <!-- Angular Material Spinner -->
   <div class="spinner-wrapper" *ngIf="loading">
     <mat-progress-spinner
       mode="indeterminate"
@@ -27,7 +25,6 @@
     ></mat-progress-spinner>
   </div>
 
-  <!-- Starships List -->
   <ul class="starship-list" *ngIf="!loading">
     <li *ngFor="let ship of filteredStarships$ | async" class="starship-item">
       <h3 class="starship-name">{{ ship.name }}</h3>
@@ -35,24 +32,46 @@
         <strong>Manufacturer:</strong> {{ ship.manufacturer }}
       </p>
       <p class="starship-detail"><strong>Model:</strong> {{ ship.model }}</p>
+
+      <button class="toggle-details-button" (click)="toggleDetails(ship)">
+        {{ isExpanded(ship) ? "Hide Details" : "Show Details" }}
+      </button>
+
+      <div *ngIf="isExpanded(ship)" class="additional-details">
+        <p class="starship-detail"><strong>Crew:</strong> {{ ship.crew }}</p>
+        <p class="starship-detail">
+          <strong>Passengers:</strong> {{ ship.passengers }}
+        </p>
+        <p class="starship-detail">
+          <strong>Cargo Capacity:</strong> {{ ship.cargoCapacity }}
+        </p>
+        <p class="starship-detail">
+          <strong>Length:</strong> {{ ship.length }}
+        </p>
+        <p class="starship-detail">
+          <strong>Consumables:</strong> {{ ship.consumables }}
+        </p>
+        <p class="starship-detail">
+          <strong>Manufacturer:</strong> {{ ship.manufacturer }}
+        </p>
+      </div>
     </li>
   </ul>
 
-  <!-- Pagination Buttons -->
   <div class="pagination">
     <button
       class="pagination-button"
-      [disabled]="currentPage === 1"
+      [disabled]="currentPage === 1 || filtered"
       (click)="goToPage(currentPage - 1)"
     >
       Previous
     </button>
     <span class="pagination-info"
-      >Page {{ currentPage }} of {{ totalPages }}</span
+      >Page {{ filtered ? 1 : currentPage }} of {{ totalPages }}</span
     >
     <button
       class="pagination-button"
-      [disabled]="currentPage === totalPages"
+      [disabled]="currentPage === totalPages || filtered"
       (click)="goToPage(currentPage + 1)"
     >
       Next
