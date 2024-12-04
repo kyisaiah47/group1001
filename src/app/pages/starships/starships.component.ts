@@ -32,7 +32,7 @@ export class StarshipsComponent implements OnInit {
   constructor(private starshipService: StarshipService) {}
 
   private splitManufacturers(manufacturer: string): string[] {
-    const regex = /([^,]+(?:, Inc\.)?)/g;
+    const regex = /([^,]+(?:, (?:Incorporated|Inc\.?))?)/g;
     const matches = manufacturer.match(regex);
 
     return matches ? matches.map((m) => m.trim()) : [];
